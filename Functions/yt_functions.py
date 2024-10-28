@@ -1,15 +1,18 @@
 import os
 from youtube_transcript_api import YouTubeTranscriptApi
 from openai import OpenAI
+from os.path import join, dirname
 from dotenv import load_dotenv
 
-load_dotenv()
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
+
 
 class YTFunctions:
     @staticmethod
     def summarize_video(video_url):
         # Obter a chave de API de uma variável de ambiente
-        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
         # Extrair video_id da URL
         if 'watch?v=' in video_url:
