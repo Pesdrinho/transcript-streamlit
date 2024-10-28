@@ -1,4 +1,5 @@
 import os
+import openai
 from openai import OpenAI
 from os.path import join, dirname
 from dotenv import load_dotenv
@@ -7,6 +8,8 @@ dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def generate_summary(transcription_text):
     response = client.chat.completions.create(
